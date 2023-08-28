@@ -1,0 +1,257 @@
+[
+    {
+        "id": "cdf7213e.f9609",
+        "type": "tab",
+        "label": "WeatherSensorsNetwork",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4831569c.f27638",
+        "type": "tcp in",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60008",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "9e864cd8.0a94b8"
+            ]
+        ]
+    },
+    {
+        "id": "9e864cd8.0a94b8",
+        "type": "csv",
+        "z": "cdf7213e.f9609",
+        "name": "Recognizer",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "value,unit_measure",
+        "skip": "0",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "44fc9295.cc4c8c"
+            ]
+        ]
+    },
+    {
+        "id": "44fc9295.cc4c8c",
+        "type": "switch",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "property": "payload.unit_measure",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 540,
+        "y": 240,
+        "wires": [
+            [
+                "edea778e.de5cd"
+            ],
+            [
+                "156611ad.9fda5e"
+            ],
+            [
+                "3a5b0858.e71878"
+            ],
+            [
+                "d7391081.496c48"
+            ]
+        ]
+    },
+    {
+        "id": "54ebc213.ea880c",
+        "type": "comment",
+        "z": "cdf7213e.f9609",
+        "name": "Unit Measure: 0->Temperature, 1->Humidity, 2->Wind, 3-> Air Quality",
+        "info": "",
+        "x": 330,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "23e55641.976d8a",
+        "type": "mqtt out",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "topic": "channels/2111175/publish/fields/field1",
+        "qos": "0",
+        "retain": "",
+        "broker": "d3fa694e.2660b",
+        "x": 1050,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "52ca53c6.25d204",
+        "type": "mqtt out",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "topic": "channels/2111175/publish/fields/field2",
+        "qos": "0",
+        "retain": "",
+        "broker": "d3fa694e.2660b",
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "43d12c78.4b5404",
+        "type": "mqtt out",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "topic": "channels/2111175/publish/fields/field3",
+        "qos": "0",
+        "retain": "",
+        "broker": "d3fa694e.2660b",
+        "x": 1050,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e77db095.1c0b5",
+        "type": "mqtt out",
+        "z": "cdf7213e.f9609",
+        "name": "",
+        "topic": "channels/2111175/publish/fields/field4",
+        "qos": "0",
+        "retain": "",
+        "broker": "d3fa694e.2660b",
+        "x": 1050,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "3a5b0858.e71878",
+        "type": "function",
+        "z": "cdf7213e.f9609",
+        "name": "Field3",
+        "func": "msg.payload = msg.payload.value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 260,
+        "wires": [
+            [
+                "43d12c78.4b5404"
+            ]
+        ]
+    },
+    {
+        "id": "d7391081.496c48",
+        "type": "function",
+        "z": "cdf7213e.f9609",
+        "name": "Field4",
+        "func": "msg.payload = msg.payload.value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 340,
+        "wires": [
+            [
+                "e77db095.1c0b5"
+            ]
+        ]
+    },
+    {
+        "id": "edea778e.de5cd",
+        "type": "function",
+        "z": "cdf7213e.f9609",
+        "name": "Field1",
+        "func": "msg.payload = msg.payload.value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 100,
+        "wires": [
+            [
+                "23e55641.976d8a"
+            ]
+        ]
+    },
+    {
+        "id": "156611ad.9fda5e",
+        "type": "function",
+        "z": "cdf7213e.f9609",
+        "name": "Field2",
+        "func": "msg.payload = msg.payload.value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 760,
+        "y": 180,
+        "wires": [
+            [
+                "52ca53c6.25d204"
+            ]
+        ]
+    },
+    {
+        "id": "e24b9f0a.9b18e",
+        "type": "comment",
+        "z": "cdf7213e.f9609",
+        "name": "Field: 1->Temperature, 2->Humidity, 3->Wind, 4-> Air Quality",
+        "info": "",
+        "x": 300,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d3fa694e.2660b",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "Thingspeak",
+        "broker": "mqtt3.thingspeak.com",
+        "port": "1883",
+        "clientid": "HBAcGAIgGQU8Jj0sDyorBSc",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]
