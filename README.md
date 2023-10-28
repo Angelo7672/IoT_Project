@@ -15,7 +15,7 @@ re-transmitted.
 transmit data from sensor nodes to Thingspeak through MQTT.
 5. Thingspeak must show at least three charts on a public channel.
 
-![Screenshot 2023-08-29 164603](https://github.com/Angelo7672/IoT_Project/assets/100519177/9eac42ce-105c-4f12-a7ef-1c3694aa78cd)
+     ![Figure](https://github.com/Angelo7672/IoT_Project/assets/100519177/25fe55d8-3819-4022-87aa-0eada98f2a7f)
 
 ## How to use:
 Open in a terminal the folder of the project, then insert the command:
